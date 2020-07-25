@@ -1,4 +1,4 @@
-var notes = require("../db/notes.js");
+
 
 module.exports = function (app) {
     app.get("/notes", function(req, res){
