@@ -16,17 +16,33 @@ app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
+var notes = JSON.parse(fs.readFileSync("/db/db.json"));
 
-app.get("/notes", function(req, res){
-    
+
+app.get("/api/notes", function(req, res){
+   // res.sendFile(path.join(__dirname, "/db/db.json"))
+   return res.json(notes);
 })
 
-app.post("/notes", function(req, res){
+app.post("/api/notes", function(req, res){
    
 })
 
-app.delete("/notes/:id", function(req, res){
-   
+app.delete("/api/notes/:id", function(req, res){
+    var chosen = req.params.id;
+    console.log(chosen);
+
+    var newNote = [];
+    var deleted = false;
+  
+    for (var i = 0; i < notes.length; i++) {
+      if (chosen === notes[i].title) {
+        deleted = true;
+      }else{
+          newNote.push(notes[i])
+      }
+    }
+  
 })
 
 app.listen(PORT,function(){
